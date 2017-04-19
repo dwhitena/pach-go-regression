@@ -11,10 +11,13 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	"github.com/sajari/regression"
 )
+
+const inDir = "/pfs/training"
 
 // ModelInfo includes the information about the
 // model that is output from the training.
@@ -33,7 +36,7 @@ type CoefficientInfo struct {
 func main() {
 
 	// Open the training dataset file.
-	f, err := os.Open("../data/diabetes.csv")
+	f, err := os.Open(filepath.Join(inDir, "diabetes.csv"))
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -14,9 +14,9 @@ import (
 )
 
 const (
-	inModelDir = "../goregtrain-multi"
-	inVarDir   = "../data/test"
-	outDir     = ""
+	inModelDir = "/pfs/model/model.json"
+	inVarDir   = "/pfs/attributes"
+	outDir     = "/pfs/out"
 )
 
 // ModelInfo includes the information about the
