@@ -12,7 +12,7 @@ To deploy and manage the model discussed above, we will implement it’s trainin
 
 The general structure of our pipeline will look like this:
 
-![Alt text](pipeline.jpg)
+![Alt text](pipeline.png)
 
 The cylinders represent data “repositories” in which Pachyderm will version training, model, etc. data (think “git for data”).  These data repositories are then input/output of the linked data processing stages (represented by the boxes in the figure).  
 

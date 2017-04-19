@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	inModelDir = "/pfs/model/model.json"
+	inModelDir = "/pfs/model"
 	inVarDir   = "/pfs/attributes"
 	outDir     = "/pfs/out"
 )

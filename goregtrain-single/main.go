@@ -17,7 +17,10 @@ import (
 	"github.com/sajari/regression"
 )
 
-const inDir = "/pfs/training"
+const (
+	inDir  = "/pfs/training"
+	outDir = "/pfs/out"
+)
 
 // ModelInfo includes the information about the
 // model that is output from the training.
@@ -107,7 +110,7 @@ func main() {
 	}
 
 	// Save the marshalled output to a file.
-	if err := ioutil.WriteFile("model.json", outputData, 0644); err != nil {
+	if err := ioutil.WriteFile(filepath.Join(outDir, "model.json"), outputData, 0644); err != nil {
 		log.Fatal(err)
 	}
 }
