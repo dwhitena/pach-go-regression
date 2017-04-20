@@ -123,18 +123,17 @@ diabetes.csv        file                73.74 KiB
 ➔
 ```
 
-We can then create our training and prediction pipelines based on a [JSON specification](pipeline.json) specifying the Docker images to run for each processing stage, the input to each processing stage, and commands to run in the Docker images.  You could use either the single (`dwhitena/goregtrain:single`) or multiple (`dwhitena/goregtrain:mutli`) regression models in this specification. This will automatically trigger the training of our model and output of the JSON model representation, because Pachyderm sees that there is training data in `training` that has yet to be processed:
+We can then create our training and prediction pipelines based on JSON specifications ([train.json](train.json) and [predict.json](predict.json)) specifying the Docker images to run for each processing stage, the input to each processing stage, and commands to run in the Docker images.  You could use either the single (`dwhitena/goregtrain:single`) or multiple (`dwhitena/goregtrain:mutli`) regression models in [train.json](train.json). This will automatically trigger the training of our model and output of the JSON model representation, because Pachyderm sees that there is training data in `training` that has yet to be processed:
 
 ```
 ➔ cd ..
-➔ pachctl create-pipeline -f pipeline.json 
+➔ pachctl create-pipeline -f train.json 
 ➔ pachctl list-job
 ID                                   OUTPUT COMMIT                          STARTED       DURATION  RESTART PROGRESS STATE            
 552ae442-6839-409e-b002-4d6fd75ad0e3 model/61e24952667842f9b0888aa69543463e 4 seconds ago 2 seconds 0       1 / 1    success 
 ➔ pachctl list-repo
 NAME                CREATED             SIZE                
 model               10 seconds ago      252 B               
-prediction          10 seconds ago      0 B                 
 training            3 minutes ago       73.74 KiB           
 attributes          3 minutes ago       0 B                 
 ➔ pachctl list-file model master
@@ -156,9 +155,10 @@ model.json          file                252 B
 }
 ```
 
-Finally, we can commit some attribute files into `attributes` to trigger predictions:
+Finally, we can create out prediction pipeline stage and commit some attribute files into `attributes` to trigger predictions:
 
 ```
+➔ pachyderm create-pipeline -f predict.json
 ➔ cd data/test/
 ➔ ls
 1.json  2.json  3.json
