@@ -10,18 +10,20 @@
     "strategy": "CONSTANT",
     "constant": "1"
   },
-  "inputs": [
-    {
-      "repo": {
-        "name": "attributes"
+  "input": {
+    "cross": [
+      {
+        "atom": {
+          "repo": "attributes",
+          "glob": "/*"
+	}
       },
-      "glob": "/*"
-    },
-    {
-      "repo": {
-	"name": "model"
-      },
-      "glob": "/"
-    }
-  ]
+      {
+	"atom": {
+          "repo": "model",
+          "glob": "/"
+	}
+      }
+    ]
+  }
 }

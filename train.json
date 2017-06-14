@@ -3,18 +3,16 @@
     "name": "model"
   },
   "transform": {
-    "image": "dwhitena/goregtrain:single",
+    "image": "dwhitena/goregtrain:multi",
     "cmd": [ "/goregtrain" ] 
   },
   "parallelism_spec": {
     "strategy": "CONSTANT",
     "constant": "1"
   },
-  "inputs": [
-    {
-      "repo": {
-        "name": "training"
-      },
+  "input": {
+    "atom": {
+      "repo": "training",
       "glob": "/"
     }
   ]
