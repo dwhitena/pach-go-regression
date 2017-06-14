@@ -1,12 +1,9 @@
-// All material is licensed under the Apache License Version 2.0, January 2004
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Sample program to train a regression model.
 package main
 
 import (
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -15,11 +12,6 @@ import (
 	"strconv"
 
 	"github.com/sajari/regression"
-)
-
-const (
-	inDir  = "/pfs/training"
-	outDir = "/pfs/out"
 )
 
 // ModelInfo includes the information about the
@@ -38,8 +30,15 @@ type CoefficientInfo struct {
 
 func main() {
 
+	// Declare the input and output directory flags.
+	inDirPtr := flag.String("inDir", "", "The directory containing the training data.")
+	outDirPtr := flag.String("outDir", "", "The output directory")
+
+	// Parse the command line flags.
+	flag.Parse()
+
 	// Open the training dataset file.
-	f, err := os.Open(filepath.Join(inDir, "diabetes.csv"))
+	f, err := os.Open(filepath.Join(*inDirPtr, "diabetes.csv"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -110,7 +109,7 @@ func main() {
 	}
 
 	// Save the marshalled output to a file.
-	if err := ioutil.WriteFile(filepath.Join(outDir, "model.json"), outputData, 0644); err != nil {
+	if err := ioutil.WriteFile(filepath.Join(*outDirPtr, "model.json"), outputData, 0644); err != nil {
 		log.Fatal(err)
 	}
 }

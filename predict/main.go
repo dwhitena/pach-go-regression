@@ -1,22 +1,13 @@
-// All material is licensed under the Apache License Version 2.0, January 2004
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Sample program to make a prediction based on a persisted regression model.
 package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-)
-
-const (
-	inModelDir = "/pfs/model"
-	inVarDir   = "/pfs/attributes"
-	outDir     = "/pfs/out"
 )
 
 // ModelInfo includes the information about the
@@ -49,8 +40,16 @@ type IndependentVar struct {
 
 func main() {
 
+	// Declare the input and output directory flags.
+	inModelDirPtr := flag.String("inModelDir", "", "The directory containing the model.")
+	inVarDirPtr := flag.String("inVarDir", "", "The directory containing the input attributes.")
+	outDirPtr := flag.String("outDir", "", "The output directory")
+
+	// Parse the command line flags.
+	flag.Parse()
+
 	// Load the model file.
-	f, err := ioutil.ReadFile(filepath.Join(inModelDir, "model.json"))
+	f, err := ioutil.ReadFile(filepath.Join(*inModelDirPtr, "model.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,7 +61,7 @@ func main() {
 	}
 
 	// Walk over files in the input.
-	if err := filepath.Walk(inVarDir, func(path string, info os.FileInfo, err error) error {
+	if err := filepath.Walk(*inVarDirPtr, func(path string, info os.FileInfo, err error) error {
 
 		// Skip any directories.
 		if info.IsDir() {
@@ -70,7 +69,7 @@ func main() {
 		}
 
 		// Open any files.
-		f, err := ioutil.ReadFile(filepath.Join(inVarDir, info.Name()))
+		f, err := ioutil.ReadFile(filepath.Join(*inVarDirPtr, info.Name()))
 		if err != nil {
 			return err
 		}
@@ -93,7 +92,7 @@ func main() {
 		}
 
 		// Save the marshalled output to a file.
-		if err := ioutil.WriteFile(filepath.Join(outDir, info.Name()), outputData, 0644); err != nil {
+		if err := ioutil.WriteFile(filepath.Join(*outDirPtr, info.Name()), outputData, 0644); err != nil {
 			log.Fatal(err)
 		}
 

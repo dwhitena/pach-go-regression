@@ -4,7 +4,12 @@
   },
   "transform": {
     "image": "dwhitena/goregpredict",
-    "cmd": [ "/goregpredict" ]
+    "cmd": [ 
+      "/goregpredict", 
+      "-inModelDir=/pfs/model", 
+      "-inVarDir=/pfs/attributes", 
+      "-outDir=/pfs/out"       
+    ]
   },
   "parallelism_spec": {
     "strategy": "CONSTANT",

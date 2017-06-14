@@ -24,7 +24,7 @@ Once deployed, you will be able to use the Pachyderm’s `pachctl` CLI tool to c
 
 ## Training/fitting the linear regression model
 
-First, let’s look our training stage.  The [goregtrain-single](goregtrain-single) and [goregtrain-multi](goregtrain-multi) go programs (and corresponding Docker images) allow us to train a single linear regression model and a multiple linear regression model, respectively, using github.com/sajari/regression.  The single linear regression model will predict diabetes disease progression based on a single attribute `bmi` (body mass index), and the multiple linear regression model will predict diabetes disease progression based on two attributes, `bmi` and `ltg` (a blood related measurement).
+First, let’s look our training stage.  The [train-single](train-single) and [train-multi](train-multi) go programs (and corresponding Docker images) allow us to train a single linear regression model and a multiple linear regression model, respectively, using github.com/sajari/regression.  The single linear regression model will predict diabetes disease progression based on a single attribute `bmi` (body mass index), and the multiple linear regression model will predict diabetes disease progression based on two attributes, `bmi` and `ltg` (a blood related measurement).
 
 The data that we will use to train the model is freely available (e.g., [here](https://archive.ics.uci.edu/ml/datasets/Diabetes)) in CSV format:  
 
@@ -39,7 +39,7 @@ age,sex,bmi,map,tc,ldl,hdl,tch,ltg,glu,y
 etc...
 ```
 
-The [goregtrain-single](goregtrain-single) and [goregtrain-multi](goregtrain-multi) go programs take this CSV dataset as input and output representations of the trained/fit models in a JSON format that looks like:
+The [train-single](train-single) and [train-multi](train-multi) go programs take this CSV dataset as input and output representations of the trained/fit models in a JSON format that looks like:
 
 ```
 {
@@ -59,7 +59,7 @@ The [goregtrain-single](goregtrain-single) and [goregtrain-multi](goregtrain-mul
 
 ## Making predictions with the linear regression model.
 
-The [goregpredict](goregpredict) go program (and corresponding Docker image) allows us to predict diabetes disease progression based on a saved JSON representation of our model (see above).  `goregpredict` takes that JSON model representation as input along with one or more JSON files, each listing particular attributes:
+The [predict](predict) go program (and corresponding Docker image) allows us to predict diabetes disease progression based on a saved JSON representation of our model (see above).  `goregpredict` takes that JSON model representation as input along with one or more JSON files, each listing particular attributes:
 
 ```
 {
