@@ -3,7 +3,7 @@
     "name": "model"
   },
   "transform": {
-    "image": "dwhitena/goregtrain:single",
+    "image": "dwhitena/goregtrain:singleult",
     "cmd": [ 
       "/goregtrain",
       "-inDir=/pfs/training",
@@ -11,7 +11,6 @@
     ] 
   },
   "parallelism_spec": {
-    "strategy": "CONSTANT",
     "constant": "1"
   },
   "input": {
