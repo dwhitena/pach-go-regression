@@ -3,11 +3,11 @@
     "name": "prediction"
   },
   "transform": {
-    "image": "dwhitena/goregpredict:ult",
+    "image": "dwhitena/goregpredict",
     "cmd": [ 
       "/goregpredict", 
       "-inModelDir=/pfs/model", 
-      "-inVarDir=/pfs/attributes", 
+      "-inVarDir=/pfs/attributes/", 
       "-outDir=/pfs/out"       
     ]
   },
@@ -17,13 +17,13 @@
   "input": {
     "cross": [
       {
-        "atom": {
+        "pfs": {
           "repo": "attributes",
           "glob": "/*"
 	}
       },
       {
-	"atom": {
+	"pfs": {
           "repo": "model",
           "glob": "/"
 	}
