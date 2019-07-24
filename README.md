@@ -312,7 +312,7 @@ Let's say that one or more observations in our training data set were corrupt or
 
 ```
 $ vim diabetes.csv
-$ pachctl put file training@master:diabetes.csv -f -o diabetes.csv
+$ pachctl put file training@master:diabetes.csv -f diabetes.csv -o
 ```
 
 Immediately, Pachyderm "knows" that the data has been updated, and it starts a new job to update the modeling and QC. Not only that, when the new model has been produced and QC'ed, Pachyderm "knows" that there is a new model and updates the previously inferred disease predictions.
